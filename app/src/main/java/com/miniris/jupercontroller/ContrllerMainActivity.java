@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,12 +51,57 @@ public class ContrllerMainActivity extends ActionBarActivity {
                 currentMotorState[2], currentMotorState[3]));
     }
 
+    public void controlButtonInit() {
+        View.OnTouchListener tl = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int motorNums = Integer.parseInt(v.getTag().toString());
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if ((motorNums & 8) == 8) { currentMotorState[0] += Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 4) == 4) { currentMotorState[1] += Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 2) == 2) { currentMotorState[2] += Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 1) == 1) { currentMotorState[3] += Common.MOTOR_VALUE_OFFSET; }
+                        send_motor(currentMotorState);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        if ((motorNums & 8) == 8) { currentMotorState[0] -= Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 4) == 4) { currentMotorState[1] -= Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 2) == 2) { currentMotorState[2] -= Common.MOTOR_VALUE_OFFSET; }
+                        if ((motorNums & 1) == 1) { currentMotorState[3] -= Common.MOTOR_VALUE_OFFSET; }
+                        send_motor(currentMotorState);
+                        return true;
+                }
+                return false;
+            }
+        };
+        ImageButton moveForwardButton = (ImageButton) findViewById(R.id.moveForward_button);
+        moveForwardButton.setTag(3); // 3,4
+        moveForwardButton.setOnTouchListener(tl);
+        ImageButton moveBackwardButton = (ImageButton) findViewById(R.id.moveBackward_button);
+        moveBackwardButton.setTag(12); // 1,2
+        moveBackwardButton.setOnTouchListener(tl);
+        ImageButton moveLeftButton = (ImageButton) findViewById(R.id.moveLeft_button);
+        moveLeftButton.setTag(5); // 2,4
+        moveLeftButton.setOnTouchListener(tl);
+        ImageButton moveRightButton = (ImageButton) findViewById(R.id.moveRight_button);
+        moveRightButton.setTag(10); // 1,3
+        moveRightButton.setOnTouchListener(tl);
+        ImageButton turnCWButton = (ImageButton) findViewById(R.id.turnCW_button);
+        turnCWButton.setTag(9); // 1,4
+        turnCWButton.setOnTouchListener(tl);
+        ImageButton turnCCWButton = (ImageButton) findViewById(R.id.turnCCW_button);
+        turnCCWButton.setTag(6); // 2,3
+        turnCCWButton.setOnTouchListener(tl);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contrller_main);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        controlButtonInit();
     }
 
 

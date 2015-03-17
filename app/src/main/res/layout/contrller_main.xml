@@ -99,7 +99,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_cw"
-                    android:id="@+id/button"
+                    android:id="@+id/turnCW_button"
                     android:layout_column="0"
                     android:contentDescription="@string/turnCW" />
 
@@ -108,17 +108,16 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_up"
-                    android:id="@+id/button2"
+                    android:id="@+id/moveForward_button"
                     android:layout_column="1"
-                    android:contentDescription="@string/moveForward"
-                    android:="moveForward"/>
+                    android:contentDescription="@string/moveForward" />
 
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_ccw"
-                    android:id="@+id/button3"
+                    android:id="@+id/turnCCW_button"
                     android:layout_column="2"
                     android:contentDescription="@string/turnCCW"/>
             </TableRow>
@@ -133,7 +132,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_left"
-                    android:id="@+id/button4"
+                    android:id="@+id/moveLeft_button"
                     android:layout_column="0"
                     android:contentDescription="@string/moveLeft" />
 
@@ -173,7 +172,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:src="@drawable/ic_arrow_down"
-                    android:id="@+id/button8"
+                    android:id="@+id/moveBackward_button"
                     android:layout_column="1"
                     android:contentDescription="@string/moveBackward"/>
 

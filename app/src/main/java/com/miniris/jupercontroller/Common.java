@@ -19,4 +19,6 @@ public interface Common {
 
     public final int MAX_MOTOR_VALUE = 99;
     public final int MIN_MOTOR_VALUE = 0;
+
+    public final int MOTOR_VALUE_OFFSET = 5;
 }
