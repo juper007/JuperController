@@ -136,9 +136,14 @@ public class BluetoothService {
                                     .sendToTarget();
                             break;
                         case Common.COMMAND_STATE:
-                            sizeBuff = new byte[4];
-                            inStream.read(sizeBuff);
-                            mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_STATE, sizeBuff.length, sizeBuff)
+                            int[] motorBuff = new int[4];
+                            for (int i=0; i < 4; i++)
+                            {
+                                sizeBuff = new byte[2];
+                                inStream.read(sizeBuff);
+                                motorBuff[i] = Integer.parseInt(sizeBuff.toString());
+                            }
+                            mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_STATE, motorBuff.length, motorBuff)
                                     .sendToTarget();
                             break;
                         default:

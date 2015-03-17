@@ -21,7 +21,7 @@ import java.io.IOException;
 public class ContrllerMainActivity extends ActionBarActivity {
 
     private BluetoothService mBluetoothService;
-    private byte[] currentMotorState = {0,0,0,0};
+    private int[] currentMotorState = {0,0,0,0};
 
     public void displayToast(int stringId) {
         Toast mToast = Toast.makeText(this,stringId, Toast.LENGTH_SHORT);
@@ -46,7 +46,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
         send_message("END");
     }
 
-    public void send_motor(byte[] currentMotorState) {
+    public void send_motor(int[] currentMotorState) {
         send_message(String.format("MOR%02d%02d%02d%02d", currentMotorState[0], currentMotorState[1],
                 currentMotorState[2], currentMotorState[3]));
     }
@@ -143,23 +143,23 @@ public class ContrllerMainActivity extends ActionBarActivity {
     public void startBluetoothServer() {
         try {
             mBluetoothService = new BluetoothService(mHandler);
-            //send_start();
+            send_start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void displayMotorState(byte[] motorState)
+    public void displayMotorState()
     {
-        currentMotorState = motorState;
+        //currentMotorState = motorState;
         TextView m1 = (TextView) findViewById(R.id.M1_state);
-        m1.setText(currentMotorState[0]);
+        m1.setText(Integer.toString(currentMotorState[0]));
         TextView m2 = (TextView) findViewById(R.id.M2_state);
-        m2.setText(currentMotorState[1]);
+        m2.setText(Integer.toString(currentMotorState[1]));
         TextView m3 = (TextView) findViewById(R.id.M3_state);
-        m3.setText(currentMotorState[2]);
+        m3.setText(Integer.toString(currentMotorState[2]));
         TextView m4 = (TextView) findViewById(R.id.M4_state);
-        m4.setText(currentMotorState[3]);
+        m4.setText(Integer.toString(currentMotorState[3]));
     }
 
     final Handler mHandler = new Handler() {
@@ -169,8 +169,8 @@ public class ContrllerMainActivity extends ActionBarActivity {
                 case Common.MESSAGE_READ:
                     switch (msg.arg1) {
                         case Common.COMMAND_STATE:
-                            byte[] motorState = (byte[]) msg.obj;
-                            displayMotorState(motorState);
+                            currentMotorState = (int[]) msg.obj;
+                            displayMotorState();
                         default:
                             displayToast("Unknown command : " + msg.arg1);
                             break;
@@ -197,6 +197,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
         } else {
             startBluetoothServer();
         }
+        displayMotorState();
     }
 
     public void endController(View view){
@@ -222,10 +223,5 @@ public class ContrllerMainActivity extends ActionBarActivity {
             }
         }
         send_motor(currentMotorState);
-    }
-
-    public void moveForward(View view){
-        currentMotorState[2] += 5;
-        currentMotorState[3] += 5;
     }
 }
