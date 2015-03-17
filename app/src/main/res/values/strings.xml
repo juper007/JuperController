@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JuperController</string>
+    <string name="action_settings">Settings</string>
+    <string name="startButton_text">Start</string>
+    <string name="endButton_text">End</string>
+    <string name="turnCW">Turn Clockwise</string>
+    <string name="turnCCW">Turn Counter Clockwise</string>
+    <string name="moveForward">Move Forward</string>
+    <string name="moveBackward">Move Backward</string>
+    <string name="moveLeft">Move Left</string>
+    <string name="moveRight">Move Right</string>
+    <string name="goingUp">Going Up</string>
+    <string name="goingDown">Going Down</string>
+    <string name="hold">Stay</string>
+
+    <string name="unsupport_bluetooth">This device doesn\'t support bluetooth.</string>
+    <string name="disable_bluetooth">Please enable Bluetooth and try again.</string>
+
+</resources>

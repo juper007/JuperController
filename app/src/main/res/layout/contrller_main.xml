@@ -1,0 +1,217 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ContrllerMainActivity"
+    android:orientation="vertical"
+    android:baselineAligned="false"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/startButton_text"
+            android:id="@+id/startButton"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:onClick="startController"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/endButton_text"
+            android:id="@+id/endButton"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:onClick="endController"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/M1_state"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/M2_state"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/M3_state"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/M4_state"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:baselineAligned="false">
+
+        <TableLayout
+            android:layout_height="fill_parent"
+            android:paddingLeft="40dp"
+            android:paddingTop="20dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="20dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="1">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_cw"
+                    android:id="@+id/button"
+                    android:layout_column="0"
+                    android:contentDescription="@string/turnCW" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_up"
+                    android:id="@+id/button2"
+                    android:layout_column="1"
+                    android:contentDescription="@string/moveForward"
+                    android:="moveForward"/>
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_ccw"
+                    android:id="@+id/button3"
+                    android:layout_column="2"
+                    android:contentDescription="@string/turnCCW"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_left"
+                    android:id="@+id/button4"
+                    android:layout_column="0"
+                    android:contentDescription="@string/moveLeft" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_hold"
+                    android:id="@+id/button5"
+                    android:layout_column="1"
+                    android:contentDescription="@string/hold" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_right"
+                    android:id="@+id/moveRight_button"
+                    android:layout_column="2"
+                    android:contentDescription="@string/moveRight" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/button7"
+                    android:layout_column="0" />
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_arrow_down"
+                    android:id="@+id/button8"
+                    android:layout_column="1"
+                    android:contentDescription="@string/moveBackward"/>
+
+                <ImageButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/button9"
+                    android:layout_column="2" />
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="5">
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/ic_arrow_up"
+                android:id="@+id/goingUp_button"
+                android:contentDescription="@string/goingUp"
+                android:layout_weight="1"
+                android:onClick="goingUp" />
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/ic_arrow_down"
+                android:id="@+id/goingDown_button"
+                android:contentDescription="@string/goingDown"
+                android:layout_weight="1"
+                android:onClick="goingDown"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
