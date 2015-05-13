@@ -22,6 +22,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
 
     private BluetoothService mBluetoothService;
     private int[] currentMotorState = {0,0,0,0};
+    private int[] currentSensorState = {0,0,0};
 
     public void displayToast(int stringId) {
         Toast mToast = Toast.makeText(this,stringId, Toast.LENGTH_SHORT);
@@ -166,15 +167,29 @@ public class ContrllerMainActivity extends ActionBarActivity {
         m4.setText(Integer.toString(currentMotorState[3]));
     }
 
+    public void displaySnesorState()
+    {
+        TextView s1 = (TextView) findViewById(R.id.S1_state);
+        s1.setText(Float.toString(currentSensorState[0]/10));
+        TextView s2 = (TextView) findViewById(R.id.S2_state);
+        s2.setText(Float.toString(currentSensorState[1]/10));
+        TextView s3 = (TextView) findViewById(R.id.S3_state);
+        s3.setText(Float.toString(currentSensorState[2]/10));
+    }
+
     final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Common.MESSAGE_READ:
                     switch (msg.arg1) {
-                        case Common.COMMAND_STATE:
+                        case Common.COMMAND_MOTOR_STATE:
                             currentMotorState = (int[]) msg.obj;
                             displayMotorState();
+                            break;
+                        case Common.COMMAND_SENSOR_STATE:
+                            currentSensorState = (int[]) msg.obj;
+                            displaySnesorState();
                             break;
                         default:
                             displayToast("Unknown command : " + msg.arg1);

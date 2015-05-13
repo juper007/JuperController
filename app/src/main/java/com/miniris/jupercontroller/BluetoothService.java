@@ -117,7 +117,9 @@ public class BluetoothService {
                 try {
                     inStream.read(cmd);
                     int cmdCode = Integer.parseInt(new String(cmd));
+                    int count = 0;
                     byte[] sizeBuff;
+                    byte[] countBuff = new byte[1];
                     switch (cmdCode) {
                         case Common.COMMAND_IMG:
                             sizeBuff = new byte[10];
@@ -135,21 +137,35 @@ public class BluetoothService {
                             mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_IMG, size, buff)
                                     .sendToTarget();
                             break;
-                        case Common.COMMAND_STATE:
-                            byte[] countBuff = new byte[1];
+                        case Common.COMMAND_MOTOR_STATE:
                             inStream.read(countBuff);
-                            //int count = Integer.parseInt(countBuff.toString());
+                            count = Integer.parseInt(new String(countBuff));
 
-                            int[] motorBuff = new int[4];
-                            for (int i=0; i < 4; i++)
+                            int[] motorBuff = new int[count];
+                            for (int i=0; i < count; i++)
                             {
                                 sizeBuff = new byte[2];
                                 inStream.read(sizeBuff);
                                 motorBuff[i] = Integer.parseInt(new String(sizeBuff));
                             }
-                            mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_STATE, motorBuff.length, motorBuff)
+                            mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_MOTOR_STATE, motorBuff.length, motorBuff)
                                     .sendToTarget();
                             break;
+                        case Common.COMMAND_SENSOR_STATE:
+                            inStream.read(countBuff);
+                            count = Integer.parseInt(new String(countBuff));
+
+                            int[] sensorBuff = new int[count];
+                            for (int i=0; i < count; i++)
+                            {
+                                sizeBuff = new byte[2];
+                                inStream.read(sizeBuff);
+                                sensorBuff[i] = Integer.parseInt(new String(sizeBuff));
+                            }
+                            mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_SENSOR_STATE, sensorBuff.length, sensorBuff)
+                                    .sendToTarget();
+                            break;
+
                         default:
                             mHandler.obtainMessage(Common.MESSAGE_READ, cmdCode, -1, -1)
                                     .sendToTarget();

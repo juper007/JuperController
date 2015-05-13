@@ -18,19 +18,26 @@
 
         <Button
             android:layout_height="wrap_content"
-            android:text="@string/startButton_text"
-            android:id="@+id/startButton"
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:onClick="startController"/>
-
-        <Button
-            android:layout_height="wrap_content"
             android:text="@string/endButton_text"
             android:id="@+id/endButton"
             android:layout_width="fill_parent"
             android:layout_weight="1"
             android:onClick="endController"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/startButton_text"
+            android:id="@+id/startButton"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:onClick="startController"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="fill_parent"
@@ -71,6 +78,31 @@
             android:text=""
             android:id="@+id/M4_state"
             android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/S1_state"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/S2_state"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/S3_state"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 
