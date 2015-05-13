@@ -15,7 +15,7 @@ public interface Common {
 
     public final int COMMAND_UNKNOWN = 0;
     public final int COMMAND_IMG = 1;
-    public final int COMMAND_STATE = 2;
+    public final int COMMAND_STATE = 20;
 
     public final int MAX_MOTOR_VALUE = 99;
     public final int MIN_MOTOR_VALUE = 0;

@@ -39,16 +39,20 @@ public class ContrllerMainActivity extends ActionBarActivity {
     }
 
     public void send_start() {
-        send_message("STR");
+    //    send_message("STR");
     }
 
     public void send_end() {
-        send_message("END");
+        send_message("00000");
     }
 
     public void send_motor(int[] currentMotorState) {
         send_message(String.format("MOR%02d%02d%02d%02d", currentMotorState[0], currentMotorState[1],
                 currentMotorState[2], currentMotorState[3]));
+    }
+
+    public void send_command(String command, String swc, int currentMotorValue) {
+        send_message(String.format("%s%s%02d", command, swc, currentMotorValue));
     }
 
     public void controlButtonInit() {
@@ -171,6 +175,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
                         case Common.COMMAND_STATE:
                             currentMotorState = (int[]) msg.obj;
                             displayMotorState();
+                            break;
                         default:
                             displayToast("Unknown command : " + msg.arg1);
                             break;
@@ -179,7 +184,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
                 case Common.MESSAGE_WRITE:
                     byte[] writeBuf = (byte[]) msg.obj;
                     String writeMessage = new String(writeBuf);
-                    displayToast("=> " + writeMessage);
+                    //displayToast("=> " + writeMessage);
                     break;
             }
         }
@@ -206,22 +211,10 @@ public class ContrllerMainActivity extends ActionBarActivity {
     }
 
     public void goingUp(View view){
-        for(int i=0; i < currentMotorState.length; i++){
-            if (currentMotorState[i] < Common.MAX_MOTOR_VALUE)
-            {
-                currentMotorState[i]++;
-            }
-        }
-        send_motor(currentMotorState);
+        send_command("01", "0", 1);
     }
 
     public void goingDown(View view){
-        for(int i=0; i < currentMotorState.length; i++){
-            if (currentMotorState[i] > Common.MIN_MOTOR_VALUE)
-            {
-                currentMotorState[i]--;
-            }
-        }
-        send_motor(currentMotorState);
+        send_command("02", "0", 1);
     }
 }

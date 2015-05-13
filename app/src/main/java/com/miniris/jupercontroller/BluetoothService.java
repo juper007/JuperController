@@ -136,12 +136,16 @@ public class BluetoothService {
                                     .sendToTarget();
                             break;
                         case Common.COMMAND_STATE:
+                            byte[] countBuff = new byte[1];
+                            inStream.read(countBuff);
+                            //int count = Integer.parseInt(countBuff.toString());
+
                             int[] motorBuff = new int[4];
                             for (int i=0; i < 4; i++)
                             {
                                 sizeBuff = new byte[2];
                                 inStream.read(sizeBuff);
-                                motorBuff[i] = Integer.parseInt(sizeBuff.toString());
+                                motorBuff[i] = Integer.parseInt(new String(sizeBuff));
                             }
                             mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_STATE, motorBuff.length, motorBuff)
                                     .sendToTarget();
