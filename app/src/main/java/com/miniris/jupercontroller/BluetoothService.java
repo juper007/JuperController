@@ -144,7 +144,7 @@ public class BluetoothService {
                             int[] motorBuff = new int[count];
                             for (int i=0; i < count; i++)
                             {
-                                sizeBuff = new byte[2];
+                                sizeBuff = new byte[3];
                                 inStream.read(sizeBuff);
                                 motorBuff[i] = Integer.parseInt(new String(sizeBuff));
                             }

@@ -154,28 +154,58 @@ public class ContrllerMainActivity extends ActionBarActivity {
         }
     }
 
-    public void displayMotorState()
-    {
+    public void displayMotorState(){
         //currentMotorState = motorState;
         TextView m1 = (TextView) findViewById(R.id.M1_state);
-        m1.setText(Integer.toString(currentMotorState[0]));
+        m1.setText(Float.toString(currentMotorState[0] / 10));
         TextView m2 = (TextView) findViewById(R.id.M2_state);
-        m2.setText(Integer.toString(currentMotorState[1]));
+        m2.setText(Float.toString(currentMotorState[1] / 10));
         TextView m3 = (TextView) findViewById(R.id.M3_state);
-        m3.setText(Integer.toString(currentMotorState[2]));
+        m3.setText(Float.toString(currentMotorState[2] / 10));
         TextView m4 = (TextView) findViewById(R.id.M4_state);
-        m4.setText(Integer.toString(currentMotorState[3]));
+        m4.setText(Float.toString(currentMotorState[3] / 10));
     }
 
-    public void displaySnesorState()
-    {
+    public void displaySnesorState(){
         TextView s1 = (TextView) findViewById(R.id.S1_state);
-        s1.setText(Float.toString(currentSensorState[0]/10));
+        s1.setText(Float.toString(currentSensorState[0] / 10));
         TextView s2 = (TextView) findViewById(R.id.S2_state);
-        s2.setText(Float.toString(currentSensorState[1]/10));
+        s2.setText(Float.toString(currentSensorState[1] / 10));
         TextView s3 = (TextView) findViewById(R.id.S3_state);
-        s3.setText(Float.toString(currentSensorState[2]/10));
+        s3.setText(Float.toString(currentSensorState[2] / 10));
     }
+
+    public void startController(View view){
+        // Set up bluetooth
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            displayToast(R.string.unsupport_bluetooth);
+            finish();
+        }else if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBluetooth, Common.REQUEST_BLUETOOTH_ENABLE);
+        } else {
+            startBluetoothServer();
+        }
+        displayMotorState();
+    }
+
+    //###########################################################
+    //# Send Protocol
+    //#
+    //# 00|0|00 : End Communication
+    //# 01|0|XX : Move Up - XX set value
+    //# 02|0|XX : Move Down - XX set value
+    //# 03|S|XX : Move Left - XX set angle, S On(1)/Off(0)
+    //# 04|S|XX : Move Right - XX set angle, S On(1)/Off(0)
+    //# 05|S|XX : Turn CW - XX set value, S On(1)/Off(0)
+    //# 06|S|XX : Turn CCW - XX set value, S On(1)/Off(0)
+    //#
+    //# Receive Protocol
+    //# 20|X|{ AA, BB, CC, DD} : Motor Status - X motor count, AA BB CC DD Value
+    //# 21|X|{ AA, BB, CC}  : Sensor Status - X Sensor count, AA BB CC Value
+    //#
+    //###########################################################
 
     final Handler mHandler = new Handler() {
         @Override
@@ -204,21 +234,6 @@ public class ContrllerMainActivity extends ActionBarActivity {
             }
         }
     };
-
-    public void startController(View view){
-        // Set up bluetooth
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            displayToast(R.string.unsupport_bluetooth);
-            finish();
-        }else if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBluetooth, Common.REQUEST_BLUETOOTH_ENABLE);
-        } else {
-            startBluetoothServer();
-        }
-        displayMotorState();
-    }
 
     public void endController(View view){
         send_end();
