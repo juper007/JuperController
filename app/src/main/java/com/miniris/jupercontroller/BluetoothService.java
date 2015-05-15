@@ -158,7 +158,7 @@ public class BluetoothService {
                             int[] sensorBuff = new int[count];
                             for (int i=0; i < count; i++)
                             {
-                                sizeBuff = new byte[2];
+                                sizeBuff = new byte[5];
                                 inStream.read(sizeBuff);
                                 sensorBuff[i] = Integer.parseInt(new String(sizeBuff));
                             }
