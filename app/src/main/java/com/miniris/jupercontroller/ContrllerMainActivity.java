@@ -203,7 +203,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
     //#
     //# Receive Protocol
     //# 20|X|{ AA, BB, CC, DD} : Motor Status - X motor count, AA BB CC DD Value
-    //# 21|X|{ AA, BB, CC}  : Sensor Status - X Sensor count, AA BB CC Value
+    //# 21|X|{ SAA, SBB, SCC}  : Sensor Status - X Sensor count, AA BB CC Value, S sign (0:+, 1:-)
     //#
     //###########################################################
 
@@ -218,6 +218,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
                             displayMotorState();
                             break;
                         case Common.COMMAND_SENSOR_STATE:
+                            displayToast((String)msg.obj);
                             currentSensorState = (int[]) msg.obj;
                             displaySnesorState();
                             break;
