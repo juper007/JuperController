@@ -165,7 +165,11 @@ public class BluetoothService {
                                 sizeBuff = new byte[5];
                                 inStream.read(sizeBuff);
                                 sensorBuff[i] = Integer.parseInt(new String(sizeBuff));
+<<<<<<< HEAD
+                                if (sign == 1) { sensorBuff[i] = sensorBuff[i] * -1; }
+=======
                                 if (sign == 1) { sensorBuff[i] = sensorBuff[i] * (-1); }
+>>>>>>> 288e65f1cf08ba520e615ab1d7ef7951f68b7f01
                             }
                             mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_SENSOR_STATE, sensorBuff.length, sensorBuff)
                                     .sendToTarget();
