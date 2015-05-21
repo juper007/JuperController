@@ -13,7 +13,7 @@
     <string name="moveRight">Move Right</string>
     <string name="goingUp">Going Up</string>
     <string name="goingDown">Going Down</string>
-    <string name="hold">Stay</string>
+    <string name="stop">Stop</string>
 
     <string name="unsupport_bluetooth">This device doesn\'t support bluetooth.</string>
     <string name="disable_bluetooth">Please enable Bluetooth and try again.</string>

@@ -176,7 +176,8 @@
                     android:src="@drawable/ic_hold"
                     android:id="@+id/button5"
                     android:layout_column="1"
-                    android:contentDescription="@string/hold" />
+                    android:contentDescription="@string/stop"
+                    android:onClick="stopMotors"/>
 
                 <ImageButton
                     android:layout_width="fill_parent"
