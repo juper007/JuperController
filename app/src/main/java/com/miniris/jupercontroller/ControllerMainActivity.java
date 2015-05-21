@@ -2,11 +2,11 @@ package com.miniris.jupercontroller;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.io.IOException;
 
 
-public class ContrllerMainActivity extends ActionBarActivity {
+public class ControllerMainActivity extends ActionBarActivity {
 
     private BluetoothService mBluetoothService;
     private View mMainView;
@@ -186,7 +186,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
         m4.setText(Double.toString(currentMotorState[3] / 10.0));
     }
 
-    public void displaySnesorState(){
+    public void displaySensorState(){
         TextView s1 = (TextView) findViewById(R.id.S1_state);
         s1.setText(Double.toString(currentSensorState[0]/100.0));
         TextView s2 = (TextView) findViewById(R.id.S2_state);
@@ -240,7 +240,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
                             break;
                         case Common.COMMAND_SENSOR_STATE:
                             currentSensorState = (int[]) msg.obj;
-                            displaySnesorState();
+                            displaySensorState();
                             break;
                         default:
                             displayToast("Unknown command : " + msg.arg1);
