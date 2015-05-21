@@ -200,6 +200,7 @@ public class ContrllerMainActivity extends ActionBarActivity {
     //# 04|S|XX : Move Right - XX set angle, S On(1)/Off(0)
     //# 05|S|XX : Turn CW - XX set value, S On(1)/Off(0)
     //# 06|S|XX : Turn CCW - XX set value, S On(1)/Off(0)
+    //# 99|0|00 : Stop motors
     //#
     //# Receive Protocol
     //# 20|X|{ AA, BB, CC, DD} : Motor Status - X motor count, AA BB CC DD Value
@@ -218,7 +219,6 @@ public class ContrllerMainActivity extends ActionBarActivity {
                             displayMotorState();
                             break;
                         case Common.COMMAND_SENSOR_STATE:
-                            displayToast((String)msg.obj);
                             currentSensorState = (int[]) msg.obj;
                             displaySnesorState();
                             break;
@@ -247,5 +247,9 @@ public class ContrllerMainActivity extends ActionBarActivity {
 
     public void goingDown(View view){
         send_command("02", "0", 1);
+    }
+
+    public void stopMotors(View view) {
+        send_command("99", "0", 0);
     }
 }
