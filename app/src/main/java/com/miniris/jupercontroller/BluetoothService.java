@@ -144,7 +144,7 @@ public class BluetoothService {
                             int[] motorBuff = new int[count];
                             for (int i=0; i < count; i++)
                             {
-                                sizeBuff = new byte[2];
+                                sizeBuff = new byte[3];
                                 inStream.read(sizeBuff);
                                 motorBuff[i] = Integer.parseInt(new String(sizeBuff));
                             }
@@ -158,9 +158,14 @@ public class BluetoothService {
                             int[] sensorBuff = new int[count];
                             for (int i=0; i < count; i++)
                             {
-                                sizeBuff = new byte[2];
+                                byte[] signBuff = new byte[1];
+                                inStream.read(signBuff);
+                                int sign = Integer.parseInt(new String(signBuff));
+
+                                sizeBuff = new byte[5];
                                 inStream.read(sizeBuff);
                                 sensorBuff[i] = Integer.parseInt(new String(sizeBuff));
+                                if (sign == 1) { sensorBuff[i] = sensorBuff[i] * -1; }
                             }
                             mHandler.obtainMessage(Common.MESSAGE_READ, Common.COMMAND_SENSOR_STATE, sensorBuff.length, sensorBuff)
                                     .sendToTarget();

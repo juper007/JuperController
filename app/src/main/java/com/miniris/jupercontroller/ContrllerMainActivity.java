@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class ContrllerMainActivity extends ActionBarActivity {
 
     private BluetoothService mBluetoothService;
+    private View mMainView;
     private int[] currentMotorState = {0,0,0,0};
     private int[] currentSensorState = {0,0,0};
 
@@ -107,6 +109,24 @@ public class ContrllerMainActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         controlButtonInit();
+        mMainView = findViewById(R.id.main_layout);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            mMainView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 
 
@@ -158,23 +178,23 @@ public class ContrllerMainActivity extends ActionBarActivity {
     {
         //currentMotorState = motorState;
         TextView m1 = (TextView) findViewById(R.id.M1_state);
-        m1.setText(Integer.toString(currentMotorState[0]));
+        m1.setText(Double.toString(currentMotorState[0] / 10.0));
         TextView m2 = (TextView) findViewById(R.id.M2_state);
-        m2.setText(Integer.toString(currentMotorState[1]));
+        m2.setText(Double.toString(currentMotorState[1] / 10.0));
         TextView m3 = (TextView) findViewById(R.id.M3_state);
-        m3.setText(Integer.toString(currentMotorState[2]));
+        m3.setText(Double.toString(currentMotorState[2] / 10.0));
         TextView m4 = (TextView) findViewById(R.id.M4_state);
-        m4.setText(Integer.toString(currentMotorState[3]));
+        m4.setText(Double.toString(currentMotorState[3] / 10.0));
     }
 
     public void displaySnesorState()
     {
         TextView s1 = (TextView) findViewById(R.id.S1_state);
-        s1.setText(Float.toString(currentSensorState[0]/10));
+        s1.setText(Double.toString(currentSensorState[0]/100.0));
         TextView s2 = (TextView) findViewById(R.id.S2_state);
-        s2.setText(Float.toString(currentSensorState[1]/10));
+        s2.setText(Double.toString(currentSensorState[1]/100.0));
         TextView s3 = (TextView) findViewById(R.id.S3_state);
-        s3.setText(Float.toString(currentSensorState[2]/10));
+        s3.setText(Double.toString(currentSensorState[2] / 100.0));
     }
 
     final Handler mHandler = new Handler() {
@@ -197,8 +217,8 @@ public class ContrllerMainActivity extends ActionBarActivity {
                     }
                     break;
                 case Common.MESSAGE_WRITE:
-                    byte[] writeBuf = (byte[]) msg.obj;
-                    String writeMessage = new String(writeBuf);
+                    //byte[] writeBuf = (byte[]) msg.obj;
+                    //String writeMessage = new String(writeBuf);
                     //displayToast("=> " + writeMessage);
                     break;
             }
