@@ -177,7 +177,6 @@ public class ContrllerMainActivity extends ActionBarActivity {
     public void displayMotorState(){
         //currentMotorState = motorState;
         TextView m1 = (TextView) findViewById(R.id.M1_state);
-<<<<<<< HEAD
         m1.setText(Double.toString(currentMotorState[0] / 10.0));
         TextView m2 = (TextView) findViewById(R.id.M2_state);
         m2.setText(Double.toString(currentMotorState[1] / 10.0));
@@ -185,32 +184,15 @@ public class ContrllerMainActivity extends ActionBarActivity {
         m3.setText(Double.toString(currentMotorState[2] / 10.0));
         TextView m4 = (TextView) findViewById(R.id.M4_state);
         m4.setText(Double.toString(currentMotorState[3] / 10.0));
-=======
-        m1.setText(Float.toString(currentMotorState[0] / 10));
-        TextView m2 = (TextView) findViewById(R.id.M2_state);
-        m2.setText(Float.toString(currentMotorState[1] / 10));
-        TextView m3 = (TextView) findViewById(R.id.M3_state);
-        m3.setText(Float.toString(currentMotorState[2] / 10));
-        TextView m4 = (TextView) findViewById(R.id.M4_state);
-        m4.setText(Float.toString(currentMotorState[3] / 10));
->>>>>>> 288e65f1cf08ba520e615ab1d7ef7951f68b7f01
     }
 
     public void displaySnesorState(){
         TextView s1 = (TextView) findViewById(R.id.S1_state);
-<<<<<<< HEAD
         s1.setText(Double.toString(currentSensorState[0]/100.0));
         TextView s2 = (TextView) findViewById(R.id.S2_state);
         s2.setText(Double.toString(currentSensorState[1]/100.0));
         TextView s3 = (TextView) findViewById(R.id.S3_state);
         s3.setText(Double.toString(currentSensorState[2] / 100.0));
-=======
-        s1.setText(Float.toString(currentSensorState[0] / 10));
-        TextView s2 = (TextView) findViewById(R.id.S2_state);
-        s2.setText(Float.toString(currentSensorState[1] / 10));
-        TextView s3 = (TextView) findViewById(R.id.S3_state);
-        s3.setText(Float.toString(currentSensorState[2] / 10));
->>>>>>> 288e65f1cf08ba520e615ab1d7ef7951f68b7f01
     }
 
     public void startController(View view){
